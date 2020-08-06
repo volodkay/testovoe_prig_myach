@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 alert("start game");
 const canvas = document.getElementById("game");
@@ -8,7 +8,7 @@ canvas.width = 900;
 canvas.height = 500;
 
 function getRand(min, max) {
-    return Math.random() * (max - min) + min;
+  return Math.random() * (max - min) + min;
 }
 // Объект щара
 function Ball(x, y, radius, startAngle, endAngle) {
@@ -23,19 +23,14 @@ function Ball(x, y, radius, startAngle, endAngle) {
   };
 }
 // Объект прямоугольника
-function Enemy(color, x, y, width, height) {
-  this.color = color;
+function Enemy(x, y, width, height) {
   this.x = x;
   this.y = y;
   this.width = width;
   this.height = height;
   this.draw = function () // Отрисовка
   {
-    ctx.beginPath();
-    ctx.clearRect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = this.color;
     ctx.strokeRect(this.x, this.y, this.width, this.height);
-    ctx.closePath();
   };
 }
 
@@ -47,11 +42,11 @@ let y = canvas.height - enemy_max_height; // чтобы появлялся бл�
 let level = 1; // начальный уровень
 let counter = 0; // счетчик для врагов, всегда 0
 let level_done = false; // для конца уровня, ложь
-let bY = canvas.height - 50; // Игрээк шара, для прыжка 
+let bY = canvas.height - 50; // Игрээк шара, для прыжка
 let jump = false; // прыжок, ложь
 const jumpSpeed = 4; // скорость прыжка
-let us =  getRand(30, enemy_max_width); // рандомайзер ширины прямоугольника
-let tal =  getRand(30, enemy_max_height); // рандомайзер высоты прямоугольника
+let us = getRand(30, enemy_max_width); // рандомайзер ширины прямоугольника
+let tal = getRand(30, enemy_max_height); // рандомайзер высоты прямоугольника
 
 // Окошко открывает, когда уровень пройден
 function levelDoneWindow() {
@@ -60,6 +55,7 @@ function levelDoneWindow() {
 }
 // Рисовалка
 function drawGame() {
+  ctx.beginPath();
   let enemy_count = level * 2; // скейлинг количества прямоугольников от уровня
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   let ball = new Ball(canvas.width / 2, bY, 50, 0, Math.PI * 2);
@@ -76,12 +72,12 @@ function drawGame() {
   }
   // закончена
 
-  let menemy = new Enemy("#000", x, y, us, tal);
+  let menemy = new Enemy(x, y, us, tal);
   //когда прямоугольник уходит за стену
   if (menemy.x <= 0 - enemy_max_width) {
     x = canvas.width + getRand(10, 230);
-    us =  getRand(10, enemy_max_width);
-    tal =  getRand(10, enemy_max_height);
+    us = getRand(10, enemy_max_width);
+    tal = getRand(10, enemy_max_height);
     counter++;
     //если враги кончились - уровень все.
     if (counter == enemy_count) {
@@ -102,16 +98,14 @@ function drawGame() {
 
   if (ball.x < menemy.x) {
     testX = menemy.x;
-  } 
-  else if (ball.x > menemy.x + menemy.width) {
+  } else if (ball.x > menemy.x + menemy.width) {
     testX = menemy.x + menemy.width;
-  } 
+  }
   if (ball.y < menemy.y) {
     testY = menemy.y;
-  } 
-  else if (ball.y > menemy.y + menemy.height) {
+  } else if (ball.y > menemy.y + menemy.height) {
     testY = menemy.y + menemy.height;
-  } 
+  }
 
   let distX = ball.x - testX;
   let distY = ball.y - testY;
@@ -121,6 +115,7 @@ function drawGame() {
     alert("ВЫ ПРОИГРАЛИ");
     location.reload();
   }
+  ctx.closePath();
   // перестал проверять
 }
 
