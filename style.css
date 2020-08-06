@@ -1,0 +1,30 @@
+#game{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom: 0;
+    margin:auto;
+    border:solid #333 1px;
+}
+#lvl{
+    padding: 30px 10px;
+    background: #fff;
+    font-size: 25px;
+    left:0;
+    right:0;
+    top:0;
+    bottom: 0;
+    position: absolute;
+    margin:auto;
+    width:300px;
+    height: 150px;
+    border:solid goldenrod 1px;
+    display: none;
+    text-align: center;
+}
+#lvl button{
+    margin:30px auto 0px auto;
+    font-size: 18px;
+    display: block;
+}
